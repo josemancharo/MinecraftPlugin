@@ -1,0 +1,3 @@
+name: FirstPlugin
+main: josemancharo.minecraftplugin.FirstPlugin
+version: 1.0
