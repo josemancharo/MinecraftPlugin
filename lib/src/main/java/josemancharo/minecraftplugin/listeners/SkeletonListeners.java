@@ -1,4 +1,4 @@
-package josemancharo.minecraftplugin;
+package josemancharo.minecraftplugin.listeners;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.Material;
@@ -6,9 +6,13 @@ import org.bukkit.entity.*;
 import org.bukkit.event.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.*;
+import org.bukkit.plugin.java.JavaPlugin;
 
-public class SkeletonListeners implements Listener
+public class SkeletonListeners extends CustomListener
 {
+    public SkeletonListeners(JavaPlugin _plugin){ super(_plugin); }
+
     @EventHandler
     public void onTakesDamage(EntityDamageByEntityEvent event)
     {
@@ -18,8 +22,9 @@ public class SkeletonListeners implements Listener
             var player = (Player)event.getDamager();
             var skeleton = (Skeleton)event.getEntity();
 
-            if (skeleton.getHealth() == 20 && !skeleton.getName().toString().contains("Hunter"))
+            if (!skeleton.hasMetadata("injured"))
             {
+                skeleton.setMetadata("injured", new FixedMetadataValue(plugin, true));
                 skeleton.setHealth(50);
                 skeleton.getEquipment().setItemInMainHand(new ItemStack(Material.NETHERITE_SWORD));
                 skeleton.getEquipment().setHelmet(new ItemStack(Material.WITHER_SKELETON_SKULL));

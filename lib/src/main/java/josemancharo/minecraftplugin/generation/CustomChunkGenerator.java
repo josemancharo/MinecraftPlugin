@@ -1,10 +1,12 @@
-package josemancharo.minecraftplugin;
+package josemancharo.minecraftplugin.generation;
 
 import java.util.Random;
 
 import org.bukkit.*;
 import org.bukkit.generator.*;
 import org.bukkit.util.noise.*;
+
+import josemancharo.minecraftplugin.models.ChunkGeneratorData;
 
 public class CustomChunkGenerator extends ChunkGenerator {
     private int currentHeight = 0;
@@ -14,8 +16,6 @@ public class CustomChunkGenerator extends ChunkGenerator {
         var generator = new SimplexOctaveGenerator(new Random(world.getSeed()), 8);
         ChunkData chunk = createChunkData(world);
         generator.setYScale(0.005D);
-        generator.setZScale(0.09D);
-        generator.setXScale(0.09D);
         var data = new ChunkGeneratorData(world, generator, random, chunkX, chunkZ, chunk, biome);
         buildChunks(data);
         return chunk;

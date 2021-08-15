@@ -1,4 +1,4 @@
-package josemancharo.minecraftplugin;
+package josemancharo.minecraftplugin.models;
 
 import java.util.Random;
 
